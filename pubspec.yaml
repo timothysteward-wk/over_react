@@ -7,6 +7,11 @@ authors:
   - Workiva App Frameworks Team <appframeworks@workiva.com>
 environment:
   sdk: ">=1.24.2 <2.0.0"
+dependency_overrides:
+  react:
+    git:
+      url: git://github.com/evanweible-wf/react-dart.git
+      ref: f8a74d78c0205d019b0ec4643f411a8fe99a9399 # unconvertJsProps
 dependencies:
   analyzer: ">=0.30.0+4 <=0.31.0"
   barback: ">=0.15.2 <=0.15.2+14"
