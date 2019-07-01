@@ -6,7 +6,11 @@ authors:
   - Workiva UI Platform Chapter <uip@workiva.com>
   - Workiva App Frameworks Team <appframeworks@workiva.com>
 environment:
-  sdk: '>=2.1.0 <3.0.0'
+  sdk: '>=2.3.0 <3.0.0'
+
+dependency_overrides:
+  dart_dev:
+    path: ../dart_dev_v3
 
 dependencies:
   analyzer: '>=0.35.0 <0.37.0'
