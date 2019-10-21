@@ -25,7 +25,7 @@ main() {
         ClassNameBuilder builder;
 
         setUp(() {
-          builder = new ClassNameBuilder();
+          builder = ClassNameBuilder();
         });
 
         test('returns an empty className when nothing is added', () {
@@ -185,11 +185,11 @@ main() {
         group('addFromProps()', () {
           test('adds to the className from the "className" prop in the specified Map', () {
             const addedClass = 'class';
-            const Map props = const {
+            const Map props = {
               'className': addedClass
             };
 
-            ClassNameBuilder builder = new ClassNameBuilder()
+            ClassNameBuilder builder = ClassNameBuilder()
               ..addFromProps(props);
 
             expect(builder.toClassName(), equals(addedClass));
@@ -197,11 +197,11 @@ main() {
 
           test('adds to the blacklist from the "classNameBlacklist" prop in the specified Map', () {
             const blacklistedClass = 'class';
-            const Map props = const {
+            const Map props = {
               'classNameBlacklist': blacklistedClass
             };
 
-            ClassNameBuilder builder = new ClassNameBuilder()
+            ClassNameBuilder builder = ClassNameBuilder()
               ..addFromProps(props);
             builder.add(blacklistedClass);
 
@@ -210,15 +210,14 @@ main() {
 
           test('accepts null input', () {
             expect(() {
-              new ClassNameBuilder()
-                ..addFromProps(null);
+               ClassNameBuilder().addFromProps(null);
             }, returnsNormally);
           });
         });
 
         group('toProps() returns a Map with the builder\'s className and blacklist', () {
           test('', () {
-            ClassNameBuilder builder = new ClassNameBuilder()
+            ClassNameBuilder builder = ClassNameBuilder()
               ..add('class1')
               ..add('class2')
               ..blacklist('blacklist1')
@@ -231,7 +230,7 @@ main() {
           });
 
           test('when empty', () {
-            ClassNameBuilder builder = new ClassNameBuilder();
+            ClassNameBuilder builder = ClassNameBuilder();
 
             expect(builder.toProps(), equals({
               'className': '',
@@ -242,47 +241,47 @@ main() {
 
         group('merge', () {
           test('merges the className from the provided builder instance', () {
-            var otherBuilder = new ClassNameBuilder();
+            var otherBuilder = ClassNameBuilder();
 
             builder.add('a');
             otherBuilder.add('b');
-  
+
             builder.merge(otherBuilder);
             expect(builder.toClassName(), equals('a b'));
           });
 
           test('returns blacklist merged from second builder instance', () {
-            var otherBuilder = new ClassNameBuilder();
+            var otherBuilder = ClassNameBuilder();
 
             builder.blacklist('a-blacklist');
             otherBuilder.blacklist('b-blacklist');
-            
+
             builder.merge(otherBuilder);
             expect(builder.toClassNameBlacklist(), equals('a-blacklist b-blacklist'));
           });
 
           test('returns classname and blacklist merged from second builder instance', () {
-            var otherBuilder = new ClassNameBuilder();
+            var otherBuilder = ClassNameBuilder();
 
             builder.add('a');
             otherBuilder.blacklist('b-blacklist');
-            
+
             builder.merge(otherBuilder);
             expect(builder.toClassName(), equals('a'));
             expect(builder.toClassNameBlacklist(), equals('b-blacklist'));
           });
-        }); 
+        });
       });
-      
+
       group('created with .merged() constructor', () {
         test('', () {
-          var a = new ClassNameBuilder()
+          var a = ClassNameBuilder()
             ..add('a')
             ..blacklist('a-blacklist');
-          var b = new ClassNameBuilder()
+          var b = ClassNameBuilder()
             ..add('b')
             ..blacklist('b-blacklist');
-          var builder = new ClassNameBuilder.merged(a,b);
+          var builder = ClassNameBuilder.merged(a,b);
           expect(builder.toClassName(), equals('a b'));
           expect(builder.toClassNameBlacklist(), equals('a-blacklist b-blacklist'));
         });
@@ -291,22 +290,22 @@ main() {
       group('created with .fromProps() constructor', () {
         test('initializes by adding from the "className" prop', () {
           const addedClass = 'class';
-          const Map props = const {
+          const Map props = {
             'className': addedClass
           };
 
-          ClassNameBuilder builder = new ClassNameBuilder.fromProps(props);
+          ClassNameBuilder builder = ClassNameBuilder.fromProps(props);
 
           expect(builder.toClassName(), equals(addedClass));
         });
 
         test('initializes by blacklisting from the "classNameBlacklist" prop', () {
           const blacklistedClass = 'class';
-          const Map props = const {
+          const Map props = {
             'classNameBlacklist': blacklistedClass
           };
 
-          ClassNameBuilder builder = new ClassNameBuilder.fromProps(props);
+          ClassNameBuilder builder = ClassNameBuilder.fromProps(props);
           builder.add(blacklistedClass);
 
           expect(builder.toClassName(), isEmpty);
@@ -314,7 +313,7 @@ main() {
 
         test('accepts null input', () {
           expect(() {
-            new ClassNameBuilder.fromProps(null);
+             ClassNameBuilder.fromProps(null);
           }, returnsNormally);
         });
       });

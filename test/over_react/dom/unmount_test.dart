@@ -27,7 +27,7 @@ main() {
     bool unmountComponentAtNodeReturnValue;
 
     setUp(() {
-      mountNode = new DivElement();
+      mountNode = DivElement();
       document.body.append(mountNode);
     });
 

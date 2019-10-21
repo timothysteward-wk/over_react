@@ -2,6 +2,7 @@ import 'package:over_react/over_react.dart';
 
 import '../../component1/src/demo_components.dart';
 
+// ignore_for_file: file_names
 part 'faulty-component.over_react.g.dart';
 
 
@@ -31,16 +32,16 @@ class FaultyState extends _$FaultyState with _$FaultyStateAccessorsMixin {
   static const StateMeta meta = _$metaForFaultyState;
 }
 
-@Component()
-class FaultyComponent extends UiStatefulComponent<FaultyProps, FaultyState> {
+@Component2()
+class FaultyComponent extends UiStatefulComponent2<FaultyProps, FaultyState> {
   @override
-  Map getInitialState() => (newState()..hasErrored = false);
+  get initialState => (newState()..hasErrored = false);
 
   @override
-  void componentWillUpdate(_, Map nextState) {
-    final tNextState = typedStateFactory(nextState);
-    if (tNextState.hasErrored && !state.hasErrored) {
-      throw new Error();
+  dynamic getSnapshotBeforeUpdate(Map prevProps, Map prevState) {
+    final tPrevState = typedStateFactory(prevState);
+    if (!tPrevState.hasErrored && state.hasErrored) {
+      throw Error();
     }
   }
 

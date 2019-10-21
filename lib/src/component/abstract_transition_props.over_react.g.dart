@@ -11,8 +11,8 @@ abstract class TransitionPropsMixin implements _$TransitionPropsMixin {
   Map get props;
 
   static const PropsMeta meta = _$metaForTransitionPropsMixin;
-  static final TransitionPropsMapView defaultProps =
-      new TransitionPropsMapView({})..transitionCount = 1;
+  static final TransitionPropsMapView defaultProps = TransitionPropsMapView({})
+    ..transitionCount = 1;
 
   /// The number of `transitionend` event that occur when the transition node is shown/hidden.
   ///

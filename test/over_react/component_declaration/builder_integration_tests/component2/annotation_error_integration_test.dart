@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use_from_same_package
 import 'package:over_react/over_react.dart';
 import 'package:over_react/src/component_declaration/builder_helpers.dart';
 import 'package:test/test.dart';
@@ -45,7 +46,7 @@ class _$AnnotationErrorDefaultPropsProps extends UiProps {}
 class AnnotationErrorDefaultPropsComponent
     extends UiComponent2<AnnotationErrorDefaultPropsProps> {
   @override
-  Map getDefaultProps() => newProps()..id = 'testId';
+  Map get defaultProps => newProps()..id = 'testId';
 
   @override
   render() => props.children;

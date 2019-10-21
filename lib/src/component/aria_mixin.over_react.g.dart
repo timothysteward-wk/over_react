@@ -61,7 +61,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// Indicates whether assistive technologies will present all, or only parts of, the changed region
   /// based on the change notifications defined by the aria-relevant attribute. See related aria-relevant.
   ///
-  /// Both accessibility APIs and the Document Object Model [DOM] provide events to allow the assistive
+  /// Both accessibility APIs and the Document Object Model `DOM` provide events to allow the assistive
   /// technologies to determine changed areas of the document.
   ///
   /// When the content of a live region changes, user agents SHOULD examine the changed element
@@ -88,7 +88,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// Indicates whether assistive technologies will present all, or only parts of, the changed region
   /// based on the change notifications defined by the aria-relevant attribute. See related aria-relevant.
   ///
-  /// Both accessibility APIs and the Document Object Model [DOM] provide events to allow the assistive
+  /// Both accessibility APIs and the Document Object Model `DOM` provide events to allow the assistive
   /// technologies to determine changed areas of the document.
   ///
   /// When the content of a live region changes, user agents SHOULD examine the changed element
@@ -172,7 +172,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   @Accessor(key: 'aria-busy')
   set busy(bool value) => props[_$key__busy___$AriaPropsMixin] = value;
 
-  /// Indicates the current "checked" state of checkboxes, radio buttons, and other widgets. See
+  /// Indicates the current 'checked' state of checkboxes, radio buttons, and other widgets. See
   /// related aria-pressed and aria-selected.
   ///
   /// The aria-checked attribute indicates whether the element is checked (true), unchecked (false),
@@ -195,7 +195,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   dynamic get checked =>
       props[_$key__checked___$AriaPropsMixin] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
-  /// Indicates the current "checked" state of checkboxes, radio buttons, and other widgets. See
+  /// Indicates the current 'checked' state of checkboxes, radio buttons, and other widgets. See
   /// related aria-pressed and aria-selected.
   ///
   /// The aria-checked attribute indicates whether the element is checked (true), unchecked (false),
@@ -447,7 +447,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   @Accessor(key: 'aria-flowto')
   set flowto(dynamic value) => props[_$key__flowto___$AriaPropsMixin] = value;
 
-  /// Indicates an element's "grabbed" state in a drag-and-drop operation.
+  /// Indicates an element's 'grabbed' state in a drag-and-drop operation.
   ///
   /// When it is set to true it has been selected for dragging, false indicates that the element
   /// can be grabbed for a drag-and-drop operation, but is not currently grabbed, and undefined
@@ -466,7 +466,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   dynamic get grabbed =>
       props[_$key__grabbed___$AriaPropsMixin] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
-  /// Indicates an element's "grabbed" state in a drag-and-drop operation.
+  /// Indicates an element's 'grabbed' state in a drag-and-drop operation.
   ///
   /// When it is set to true it has been selected for dragging, false indicates that the element
   /// can be grabbed for a drag-and-drop operation, but is not currently grabbed, and undefined
@@ -522,17 +522,17 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// to true. When the element is presented, authors MUST set the aria-hidden attribute to false
   /// or remove the attribute, indicating that the element is visible. Some assistive technologies
   /// access WAI-ARIA information directly through the DOM and not through platform accessibility
-  /// supported by the browser. Authors MUST set aria-hidden="true" on content that is not displayed,
+  /// supported by the browser. Authors MUST set aria-hidden='true' on content that is not displayed,
   /// regardless of the mechanism used to hide it. This allows assistive technologies or user agents
   /// to properly skip hidden elements in the document.
   ///
   /// It is recommended that authors key visibility of elements off this attribute, rather than
   /// change visibility and separately have to remember to update this property. CSS 2 provides
-  /// a way to select on attribute values ([CSS]). The following CSS declaration makes content visible
+  /// a way to select on attribute values (`CSS`). The following CSS declaration makes content visible
   /// unless the aria-hidden attribute is true; scripts need only update the value of this attribute
   /// to change visibility:
   ///
-  /// [aria-hidden="true"] { visibility: hidden; }
+  /// [aria-hidden='true'] { visibility: hidden; }
   ///
   /// Note: Authors are reminded that visibility:hidden and display:none apply to all CSS media
   /// types; therefore, use of either will hide the content from assistive technologies that access
@@ -573,17 +573,17 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// to true. When the element is presented, authors MUST set the aria-hidden attribute to false
   /// or remove the attribute, indicating that the element is visible. Some assistive technologies
   /// access WAI-ARIA information directly through the DOM and not through platform accessibility
-  /// supported by the browser. Authors MUST set aria-hidden="true" on content that is not displayed,
+  /// supported by the browser. Authors MUST set aria-hidden='true' on content that is not displayed,
   /// regardless of the mechanism used to hide it. This allows assistive technologies or user agents
   /// to properly skip hidden elements in the document.
   ///
   /// It is recommended that authors key visibility of elements off this attribute, rather than
   /// change visibility and separately have to remember to update this property. CSS 2 provides
-  /// a way to select on attribute values ([CSS]). The following CSS declaration makes content visible
+  /// a way to select on attribute values (`CSS`). The following CSS declaration makes content visible
   /// unless the aria-hidden attribute is true; scripts need only update the value of this attribute
   /// to change visibility:
   ///
-  /// [aria-hidden="true"] { visibility: hidden; }
+  /// [aria-hidden='true'] { visibility: hidden; }
   ///
   /// Note: Authors are reminded that visibility:hidden and display:none apply to all CSS media
   /// types; therefore, use of either will hide the content from assistive technologies that access
@@ -675,7 +675,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// use aria-label. There may be instances where the name of an element cannot be determined programmatically
   /// from the content of the element, and there are cases where providing a visible label is not
   /// the desired user experience. Most host languages provide an attribute that could be used to
-  /// name the element (e.g., the title attribute in HTML [HTML]), yet this could present a browser
+  /// name the element (e.g., the title attribute in HTML `HTML`), yet this could present a browser
   /// tooltip. In the cases where a visible label or visible tooltip is undesirable, authors MAY
   /// set the accessible name of the element using aria-label. As required by the text alternative
   /// computation, user agents give precedence to aria-labelledby over aria-label when computing
@@ -699,7 +699,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// use aria-label. There may be instances where the name of an element cannot be determined programmatically
   /// from the content of the element, and there are cases where providing a visible label is not
   /// the desired user experience. Most host languages provide an attribute that could be used to
-  /// name the element (e.g., the title attribute in HTML [HTML]), yet this could present a browser
+  /// name the element (e.g., the title attribute in HTML `HTML`), yet this could present a browser
   /// tooltip. In the cases where a visible label or visible tooltip is undesirable, authors MAY
   /// set the accessible name of the element using aria-label. As required by the text alternative
   /// computation, user agents give precedence to aria-labelledby over aria-label when computing
@@ -729,7 +729,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// is intended to provide more verbose information.
   ///
   /// Note: The expected spelling of this property in U.S. English is "labeledby." However, the
-  /// accessibility API features to which this property is mapped have established the "labelledby"
+  /// accessibility API features to which this property is mapped have established the 'labelledby'
   /// spelling. This property is spelled that way to match the convention and minimize the difficulty
   /// for developers.
   ///
@@ -758,7 +758,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// is intended to provide more verbose information.
   ///
   /// Note: The expected spelling of this property in U.S. English is "labeledby." However, the
-  /// accessibility API features to which this property is mapped have established the "labelledby"
+  /// accessibility API features to which this property is mapped have established the 'labelledby'
   /// spelling. This property is spelled that way to match the convention and minimize the difficulty
   /// for developers.
   ///
@@ -928,7 +928,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   ///
   /// Note: In most user agent implementations, the default behavior of the ENTER or RETURN key
   /// is different between the single-line and multi-line text fields in HTML. When user has focus
-  /// in a single-line &lt;input type="text"&gt; element, the keystroke usually submits the form.
+  /// in a single-line &lt;input type='text'&gt; element, the keystroke usually submits the form.
   /// When user has focus in a multi-line &lt;textarea&gt; element, the keystroke inserts a line
   /// break. The WAI-ARIA textbox role differentiates these types of boxes with the aria-multiline
   /// attribute, so authors are advised to be aware of this distinction when designing the field.
@@ -945,7 +945,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   ///
   /// Note: In most user agent implementations, the default behavior of the ENTER or RETURN key
   /// is different between the single-line and multi-line text fields in HTML. When user has focus
-  /// in a single-line &lt;input type="text"&gt; element, the keystroke usually submits the form.
+  /// in a single-line &lt;input type='text'&gt; element, the keystroke usually submits the form.
   /// When user has focus in a multi-line &lt;textarea&gt; element, the keystroke inserts a line
   /// break. The WAI-ARIA textbox role differentiates these types of boxes with the aria-multiline
   /// attribute, so authors are advised to be aware of this distinction when designing the field.
@@ -1094,7 +1094,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   @Accessor(key: 'aria-posinset')
   set posinset(int value) => props[_$key__posinset___$AriaPropsMixin] = value;
 
-  /// Indicates the current "pressed" state of toggle buttons. See related aria-checked and aria-selected.
+  /// Indicates the current 'pressed' state of toggle buttons. See related aria-checked and aria-selected.
   ///
   /// Toggle buttons require a full press-and-release cycle to change their value. Activating it
   /// once changes the value to true, and activating it another time changes the value back to false.
@@ -1113,7 +1113,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   dynamic get pressed =>
       props[_$key__pressed___$AriaPropsMixin] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
-  /// Indicates the current "pressed" state of toggle buttons. See related aria-checked and aria-selected.
+  /// Indicates the current 'pressed' state of toggle buttons. See related aria-checked and aria-selected.
   ///
   /// Toggle buttons require a full press-and-release cycle to change their value. Activating it
   /// once changes the value to true, and activating it another time changes the value back to false.
@@ -1199,7 +1199,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// technologies, but assistive technologies are not required to present changes of all the relevant
   /// types.
   ///
-  /// Both accessibility APIs and Document Object Model Level 2 Events [DOM] provides events to
+  /// Both accessibility APIs and Document Object Model Level 2 Events `DOM` provides events to
   /// allow assistive technologies to determine changed areas of the document.
   ///
   /// When aria-relevant is not defined, an element's value is inherited from the nearest ancestor
@@ -1249,7 +1249,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   /// technologies, but assistive technologies are not required to present changes of all the relevant
   /// types.
   ///
-  /// Both accessibility APIs and Document Object Model Level 2 Events [DOM] provides events to
+  /// Both accessibility APIs and Document Object Model Level 2 Events `DOM` provides events to
   /// allow assistive technologies to determine changed areas of the document.
   ///
   /// When aria-relevant is not defined, an element's value is inherited from the nearest ancestor
@@ -1332,7 +1332,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   @override
   set role(String value) => props[_$key__role___$AriaPropsMixin] = value;
 
-  /// Indicates the current "selected" state of various widgets. See related aria-checked and aria-pressed.
+  /// Indicates the current 'selected' state of various widgets. See related aria-checked and aria-pressed.
   ///
   /// This attribute is used with single-selection and multiple-selection widgets:
   ///
@@ -1355,7 +1355,7 @@ abstract class AriaPropsMixin implements _$AriaPropsMixin {
   dynamic get selected =>
       props[_$key__selected___$AriaPropsMixin] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
-  /// Indicates the current "selected" state of various widgets. See related aria-checked and aria-pressed.
+  /// Indicates the current 'selected' state of various widgets. See related aria-checked and aria-pressed.
   ///
   /// This attribute is used with single-selection and multiple-selection widgets:
   ///

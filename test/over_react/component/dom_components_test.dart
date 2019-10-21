@@ -79,7 +79,7 @@ main() {
       if (expectedTagName == 'fontFaceSrc') expectedTagName = 'font-face-src';
       if (expectedTagName == 'fontFaceUri') expectedTagName = 'font-face-uri';
       if (expectedTagName == 'missingGlyph') expectedTagName = 'missing-glyph';
-      if (expectedTagName.startsWith(new RegExp('svg.'))) expectedTagName = expectedTagName.substring(3);
+      if (expectedTagName.startsWith( RegExp('svg.'))) expectedTagName = expectedTagName.substring(3);
 
       test('${method.toString()} generates the correct type', () {
         DomProps builder = method();

@@ -3616,13 +3616,11 @@ abstract class UbiquitousDomPropsMixin implements _$UbiquitousDomPropsMixin {
   @Accessor(doNotGenerate: true)
   DomProps _dom;
   AriaPropsMixin get aria {
-    _aria ??= new AriaPropsMapView(props);
-    return _aria;
+    return _aria ??= AriaPropsMapView(props);
   }
 
   DomPropsMixin get dom {
-    _dom ??= new DomProps(null, props);
-    return _dom;
+    return _dom ??= DomProps(null, props);
   }
 
   /// Whether the element if focusable.

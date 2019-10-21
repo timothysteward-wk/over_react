@@ -13,7 +13,6 @@
 // limitations under the License.
 
 // ignore_for_file: avoid_as
-
 part of prop_tyepdef_test_fixtures;
 
 @Factory()
@@ -26,8 +25,8 @@ class _$TestConsumingCustomRendererComponentProps extends UiProps {
   String stateKeyValueToTest;
 }
 
-@Component()
-class TestConsumingCustomRendererComponentComponent extends UiComponent<TestConsumingCustomRendererComponentProps> {
+@Component2()
+class TestConsumingCustomRendererComponentComponent extends UiComponent2<TestConsumingCustomRendererComponentProps> {
   @override
   render() {
     return (TestCustomRendererComponent()

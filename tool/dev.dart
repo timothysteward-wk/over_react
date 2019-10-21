@@ -17,14 +17,14 @@ library tool.dev;
 import 'package:dart_dev/dart_dev.dart' show dev, config;
 
 main(List<String> args) async {
-  const directories = const <String>[
+  const directories = <String>[
     'lib/',
     'test/',
     'tool/',
   ];
 
   config.analyze.entryPoints = directories;
-  config.copyLicense.directories = ['integrate']..addAll(directories);
+  config.copyLicense.directories = ['integrate', ...directories];
 
   config.test
     ..platforms = [

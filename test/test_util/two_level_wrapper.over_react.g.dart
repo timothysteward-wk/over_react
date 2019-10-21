@@ -9,13 +9,14 @@ part of 'two_level_wrapper.dart';
 // React component factory implementation.
 //
 // Registers component implementation and links type meta to builder factory.
-final $TwoLevelWrapperComponentFactory = registerComponent(
-    () => new _$TwoLevelWrapperComponent(),
-    builderFactory: TwoLevelWrapper,
-    componentClass: TwoLevelWrapperComponent,
-    isWrapper: true,
-    parentType: null,
-    displayName: 'TwoLevelWrapper');
+final $TwoLevelWrapperComponentFactory = registerComponent2(
+  () => new _$TwoLevelWrapperComponent(),
+  builderFactory: TwoLevelWrapper,
+  componentClass: TwoLevelWrapperComponent,
+  isWrapper: true,
+  parentType: null,
+  displayName: 'TwoLevelWrapper',
+);
 
 abstract class _$TwoLevelWrapperPropsAccessorsMixin
     implements _$TwoLevelWrapperProps {
@@ -39,24 +40,25 @@ class TwoLevelWrapperProps extends _$TwoLevelWrapperProps
 }
 
 _$$TwoLevelWrapperProps _$TwoLevelWrapper([Map backingProps]) =>
-    new _$$TwoLevelWrapperProps(backingProps);
+    backingProps == null
+        ? new _$$TwoLevelWrapperProps$JsMap(new JsBackedMap())
+        : new _$$TwoLevelWrapperProps(backingProps);
 
 // Concrete props implementation.
 //
 // Implements constructor and backing map, and links up to generated component factory.
-class _$$TwoLevelWrapperProps extends _$TwoLevelWrapperProps
+abstract class _$$TwoLevelWrapperProps extends _$TwoLevelWrapperProps
     with _$TwoLevelWrapperPropsAccessorsMixin
     implements TwoLevelWrapperProps {
-  // This initializer of `_props` to an empty map, as well as the reassignment
-  // of `_props` in the constructor body is necessary to work around a DDC bug: https://github.com/dart-lang/sdk/issues/36217
-  _$$TwoLevelWrapperProps(Map backingMap) : this._props = {} {
-    this._props = backingMap ?? {};
-  }
+  _$$TwoLevelWrapperProps._();
 
-  /// The backing props map proxied by this class.
-  @override
-  Map get props => _props;
-  Map _props;
+  factory _$$TwoLevelWrapperProps(Map backingMap) {
+    if (backingMap == null || backingMap is JsBackedMap) {
+      return new _$$TwoLevelWrapperProps$JsMap(backingMap);
+    } else {
+      return new _$$TwoLevelWrapperProps$PlainMap(backingMap);
+    }
+  }
 
   /// Let [UiProps] internals know that this class has been generated.
   @override
@@ -72,11 +74,66 @@ class _$$TwoLevelWrapperProps extends _$TwoLevelWrapperProps
   String get propKeyNamespace => 'TwoLevelWrapperProps.';
 }
 
+// Concrete props implementation that can be backed by any [Map].
+class _$$TwoLevelWrapperProps$PlainMap extends _$$TwoLevelWrapperProps {
+  // This initializer of `_props` to an empty map, as well as the reassignment
+  // of `_props` in the constructor body is necessary to work around a DDC bug: https://github.com/dart-lang/sdk/issues/36217
+  _$$TwoLevelWrapperProps$PlainMap(Map backingMap)
+      : this._props = {},
+        super._() {
+    this._props = backingMap ?? {};
+  }
+
+  /// The backing props map proxied by this class.
+  @override
+  Map get props => _props;
+  Map _props;
+}
+
+// Concrete props implementation that can only be backed by [JsMap],
+// allowing dart2js to compile more optimal code for key-value pair reads/writes.
+class _$$TwoLevelWrapperProps$JsMap extends _$$TwoLevelWrapperProps {
+  // This initializer of `_props` to an empty map, as well as the reassignment
+  // of `_props` in the constructor body is necessary to work around a DDC bug: https://github.com/dart-lang/sdk/issues/36217
+  _$$TwoLevelWrapperProps$JsMap(JsBackedMap backingMap)
+      : this._props = new JsBackedMap(),
+        super._() {
+    this._props = backingMap ?? new JsBackedMap();
+  }
+
+  /// The backing props map proxied by this class.
+  @override
+  JsBackedMap get props => _props;
+  JsBackedMap _props;
+}
+
 // Concrete component implementation mixin.
 //
 // Implements typed props/state factories, defaults `consumedPropKeys` to the keys
 // generated for the associated props class.
 class _$TwoLevelWrapperComponent extends TwoLevelWrapperComponent {
+  _$$TwoLevelWrapperProps$JsMap _cachedTypedProps;
+
+  @override
+  _$$TwoLevelWrapperProps$JsMap get props => _cachedTypedProps;
+
+  @override
+  set props(Map value) {
+    assert(
+        getBackingMap(value) is JsBackedMap,
+        'Component2.props should never be set directly in '
+        'production. If this is required for testing, the '
+        'component should be rendered within the test. If '
+        'that does not have the necessary result, the last '
+        'resort is to use typedPropsFactoryJs.');
+    super.props = value;
+    _cachedTypedProps = typedPropsFactoryJs(getBackingMap(value));
+  }
+
+  @override
+  _$$TwoLevelWrapperProps$JsMap typedPropsFactoryJs(JsBackedMap backingMap) =>
+      new _$$TwoLevelWrapperProps$JsMap(backingMap);
+
   @override
   _$$TwoLevelWrapperProps typedPropsFactory(Map backingMap) =>
       new _$$TwoLevelWrapperProps(backingMap);

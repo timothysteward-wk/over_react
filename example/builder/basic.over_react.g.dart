@@ -24,14 +24,14 @@ abstract class _$BasicPropsAccessorsMixin implements _$BasicProps {
 
   /// <!-- Generated from [_$BasicProps.basicProp] -->
   @override
-  @deprecated
+  @Deprecated('')
   @requiredProp
   String get basicProp =>
       props[_$key__basicProp___$BasicProps] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$BasicProps.basicProp] -->
   @override
-  @deprecated
+  @Deprecated('')
   @requiredProp
   set basicProp(String value) => props[_$key__basicProp___$BasicProps] = value;
 

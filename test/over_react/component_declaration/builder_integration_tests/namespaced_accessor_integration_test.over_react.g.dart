@@ -55,37 +55,37 @@ abstract class _$NamespacedAccessorTestPropsAccessorsMixin
   /// <!-- Generated from [_$NamespacedAccessorTestProps.customKeyProp] -->
   @override
   @Accessor(key: 'custom key!')
-  get customKeyProp =>
+  dynamic get customKeyProp =>
       props[_$key__customKeyProp___$NamespacedAccessorTestProps] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$NamespacedAccessorTestProps.customKeyProp] -->
   @override
   @Accessor(key: 'custom key!')
-  set customKeyProp(value) =>
+  set customKeyProp(dynamic value) =>
       props[_$key__customKeyProp___$NamespacedAccessorTestProps] = value;
 
   /// <!-- Generated from [_$NamespacedAccessorTestProps.customNamespaceProp] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~')
-  get customNamespaceProp =>
+  dynamic get customNamespaceProp =>
       props[_$key__customNamespaceProp___$NamespacedAccessorTestProps] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$NamespacedAccessorTestProps.customNamespaceProp] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~')
-  set customNamespaceProp(value) =>
+  set customNamespaceProp(dynamic value) =>
       props[_$key__customNamespaceProp___$NamespacedAccessorTestProps] = value;
 
   /// <!-- Generated from [_$NamespacedAccessorTestProps.customKeyAndNamespaceProp] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~', key: 'custom key!')
-  get customKeyAndNamespaceProp =>
+  dynamic get customKeyAndNamespaceProp =>
       props[_$key__customKeyAndNamespaceProp___$NamespacedAccessorTestProps] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$NamespacedAccessorTestProps.customKeyAndNamespaceProp] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~', key: 'custom key!')
-  set customKeyAndNamespaceProp(value) =>
+  set customKeyAndNamespaceProp(dynamic value) =>
       props[_$key__customKeyAndNamespaceProp___$NamespacedAccessorTestProps] =
           value;
   /* GENERATED CONSTANTS */
@@ -224,37 +224,37 @@ abstract class _$NamespacedAccessorTestStateAccessorsMixin
   /// <!-- Generated from [_$NamespacedAccessorTestState.customKeyState] -->
   @override
   @Accessor(key: 'custom key!')
-  get customKeyState =>
+  dynamic get customKeyState =>
       state[_$key__customKeyState___$NamespacedAccessorTestState] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$NamespacedAccessorTestState.customKeyState] -->
   @override
   @Accessor(key: 'custom key!')
-  set customKeyState(value) =>
+  set customKeyState(dynamic value) =>
       state[_$key__customKeyState___$NamespacedAccessorTestState] = value;
 
   /// <!-- Generated from [_$NamespacedAccessorTestState.customNamespaceState] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~')
-  get customNamespaceState =>
+  dynamic get customNamespaceState =>
       state[_$key__customNamespaceState___$NamespacedAccessorTestState] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$NamespacedAccessorTestState.customNamespaceState] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~')
-  set customNamespaceState(value) =>
+  set customNamespaceState(dynamic value) =>
       state[_$key__customNamespaceState___$NamespacedAccessorTestState] = value;
 
   /// <!-- Generated from [_$NamespacedAccessorTestState.customKeyAndNamespaceState] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~', key: 'custom key!')
-  get customKeyAndNamespaceState =>
+  dynamic get customKeyAndNamespaceState =>
       state[_$key__customKeyAndNamespaceState___$NamespacedAccessorTestState] ??
       null; // Add ` ?? null` to workaround DDC bug: <https://github.com/dart-lang/sdk/issues/36052>;
   /// <!-- Generated from [_$NamespacedAccessorTestState.customKeyAndNamespaceState] -->
   @override
   @Accessor(keyNamespace: 'custom namespace~~', key: 'custom key!')
-  set customKeyAndNamespaceState(value) =>
+  set customKeyAndNamespaceState(dynamic value) =>
       state[_$key__customKeyAndNamespaceState___$NamespacedAccessorTestState] =
           value;
   /* GENERATED CONSTANTS */

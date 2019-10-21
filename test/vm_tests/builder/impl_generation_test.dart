@@ -38,19 +38,19 @@ main() {
     });
 
     void setUpAndParse(String source) {
-      logger = new MockLogger();
+      logger = MockLogger();
 
-      sourceFile = new SourceFile.fromString(source);
+      sourceFile = SourceFile.fromString(source);
 
       unit = parseCompilationUnit(source);
-      declarations = new ParsedDeclarations(unit, sourceFile, logger);
-      implGenerator = new ImplGenerator(logger, sourceFile);
+      declarations = ParsedDeclarations(unit, sourceFile, logger);
+      implGenerator = ImplGenerator(logger, sourceFile);
     }
 
     void setUpAndGenerate(String source) {
       setUpAndParse(source);
 
-      implGenerator = new ImplGenerator(logger, sourceFile);
+      implGenerator = ImplGenerator(logger, sourceFile);
       implGenerator.generate(declarations);
     }
 
@@ -81,7 +81,7 @@ main() {
         verifyImplGenerationIsValid();
       });
 
-      void testImplGeneration(String groupName, {backwardsCompatible: true}) {
+      void testImplGeneration(String groupName, {backwardsCompatible = true}) {
         group(groupName, () {
           test('stateful components', () {
             generateFromSource(OverReactSrc.state(backwardsCompatible: backwardsCompatible).source);
@@ -261,7 +261,7 @@ main() {
               });
             }
 
-            final body = '\n/// Doc comments\n'
+            const body = '\n/// Doc comments\n'
                 '@deprecated()\n'
                 'String someField;\n'
                 'bool foo, bar, baz;\n'
@@ -486,8 +486,8 @@ main() {
               '..item2 = \'some_prop\';'
             ];
 
-        final uselessMetaField = 'static const String meta = \'some_string\';';
-        final uselessMetaMethod = 'static String get meta => \'some_string\';';
+        const uselessMetaField = 'static const String meta = \'some_string\';';
+        const uselessMetaMethod = 'static String get meta => \'some_string\';';
 
         final fieldDeclarationsWithMetaField = List.from(fieldDeclarations)..add(uselessMetaField);
         final fieldDeclarationsWithMetaMethod = List.from(fieldDeclarations)..add(uselessMetaMethod);
@@ -632,7 +632,7 @@ main() {
             final annotatedPropsOrStateOrMixinClassName = testName.contains('mixin') ? propsOrStateOrMixinClassName : '_\$$propsOrStateOrMixinClassName';
             final expectedAccessorsMixinClass = 'abstract class $accessorsClassName implements $annotatedPropsOrStateOrMixinClassName';
             final metaStructName = ors.metaStructName(ors.annotation);
-            final expectedMetaForInstance = (new StringBuffer()
+            final expectedMetaForInstance = ( StringBuffer()
               ..writeln('const $metaStructName _\$metaFor$propsOrStateOrMixinClassName = const $metaStructName(')
               ..writeln('  fields: $accessorsClassName.${ors.constantListName},')
               ..writeln('  keys: $accessorsClassName.${ors.keyListName},')
@@ -829,9 +829,7 @@ main() {
     });
 
     group('logs a warning when', () {
-      tearDown(() {
-        verifyImplGenerationIsValid();
-      });
+      tearDown(verifyImplGenerationIsValid);
 
       group('a Component', () {
         test('implements typedPropsFactory', () {

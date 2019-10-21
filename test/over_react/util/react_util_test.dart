@@ -8,7 +8,7 @@ main() {
     UiPropsMapView mapView;
 
     setUp(() {
-      mapView = new UiPropsMapView({});
+      mapView = UiPropsMapView({});
     });
 
     tearDown(() {

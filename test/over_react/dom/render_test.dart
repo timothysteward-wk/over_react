@@ -24,11 +24,11 @@ import 'fixtures/dummy_composite_component.dart';
 
 main() {
   group('`react_dom.render`', () {
-    var renderedInstance;
+    dynamic renderedInstance;
     Element mountNode;
 
     setUp(() {
-      mountNode = new DivElement();
+      mountNode = DivElement();
       document.body.append(mountNode);
     });
 

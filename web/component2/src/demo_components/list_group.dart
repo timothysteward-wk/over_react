@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:over_react/over_react.dart';
 
 import '../demo_components.dart';
@@ -22,7 +24,7 @@ class _$ListGroupProps extends UiProps {
 @Component2()
 class ListGroupComponent extends UiComponent2<ListGroupProps> {
   @override
-  Map getDefaultProps() => (newProps()
+  get defaultProps => (newProps()
     ..elementType = ListGroupElementType.DIV
   );
 
@@ -32,7 +34,7 @@ class ListGroupComponent extends UiComponent2<ListGroupProps> {
       ..add('list-group');
 
     return (props.elementType.componentBuilderFactory()
-      ..addProps(copyUnconsumedDomProps())
+      ..modifyProps(addUnconsumedDomProps)
       ..className = classes.toClassName()
     )(props.children);
   }
@@ -45,9 +47,9 @@ class ListGroupElementType {
   ListGroupElementType._internal(this.componentBuilderFactory);
 
   /// A [Dom.ul] (HTML `<ul>` element)
-  static final ListGroupElementType UL  = new ListGroupElementType._internal(Dom.ul);
+  static final ListGroupElementType UL  = ListGroupElementType._internal(Dom.ul);
 
   /// A [Dom.div] (HTML `<div>` element)
-  static final ListGroupElementType DIV = new ListGroupElementType._internal(Dom.div);
+  static final ListGroupElementType DIV = ListGroupElementType._internal(Dom.div);
 }
 

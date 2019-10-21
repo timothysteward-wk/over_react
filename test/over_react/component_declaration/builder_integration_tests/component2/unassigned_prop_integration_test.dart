@@ -35,7 +35,7 @@ class _$FooProps extends UiProps {
 @Component2()
 class FooComponent extends UiComponent2<FooProps> {
   @override
-  Map getDefaultProps() => newProps()..id = 'testId';
+  Map get defaultProps => newProps()..id = 'testId';
 
   @override
   render() => (Dom.div())(props.unassignedProp, props.stringProp);

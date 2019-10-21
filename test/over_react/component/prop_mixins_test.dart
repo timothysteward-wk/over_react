@@ -23,11 +23,11 @@ import '../../test_util/prop_utils.dart';
 
 main() {
   group('ReactProps', () {
-    testInvalidKey((() => new ReactPropMixinsTest({})));
+    testInvalidKey((() =>  ReactPropMixinsTest({})));
     test('uses unnamespaced keys', () {
       // Test two keys to reduce the possibility that the key we picked might have a custom @Accessor annotation on it
       expect(
-          new ReactPropMixinsTest({})
+           ReactPropMixinsTest({})
             ..ref = null
             ..key = null,
           {'ref': null, 'key': null});
@@ -35,21 +35,21 @@ main() {
 
     group('prop: key can have its value set to', () {
       test('an int and be read as a String', () {
-        var reactPropsMap = new ReactPropMixinsTest({})
+        var reactPropsMap = ReactPropMixinsTest({})
           ..key = 1;
 
         expect(reactPropsMap.key, equals('1'));
       });
 
       test('a String and be read as a String', () {
-        var reactPropsMap = new ReactPropMixinsTest({})
+        var reactPropsMap = ReactPropMixinsTest({})
           ..key = '1';
 
         expect(reactPropsMap.key, equals('1'));
       });
 
       test('null and be read as a null', () {
-        var reactPropsMap = new ReactPropMixinsTest({})
+        var reactPropsMap = ReactPropMixinsTest({})
           ..key = null;
 
         expect(reactPropsMap.key, isNull);
@@ -58,19 +58,19 @@ main() {
   });
 
   group('CssClassProps', () {
-    testInvalidKey((() => new CssClassPropMixinsTest({})));
+    testInvalidKey((() =>  CssClassPropMixinsTest({})));
     test('uses unnamespaced keys', () {
       // Test two keys to reduce the possibility that the key we picked might have a custom @Accessor annotation on it
-      expect(new CssClassPropMixinsTest({})..className = null..classNameBlacklist = null, {'className': null, 'classNameBlacklist': null});
+      expect( CssClassPropMixinsTest({})..className = null..classNameBlacklist = null, {'className': null, 'classNameBlacklist': null});
     });
   });
 
   group('DomPropsMixin', () {
-    testInvalidKey((() => new DomPropMixinsTest({})));
+    testInvalidKey((() =>  DomPropMixinsTest({})));
     test('uses unnamespaced keys', () {
       // Test two keys to reduce the possibility that the key we picked might have a custom @Accessor annotation on it
       expect(
-          new DomPropMixinsTest({})
+           DomPropMixinsTest({})
             ..style = null
             ..id = null,
           {'style': null, 'id': null});
@@ -78,11 +78,11 @@ main() {
   });
 
   group('SvgPropsMixin', () {
-    testInvalidKey((() => new SvgPropMixinsTest({})));
+    testInvalidKey((() =>  SvgPropMixinsTest({})));
     test('uses unnamespaced keys', () {
       // Test two keys to reduce the possibility that the key we picked might have a custom @Accessor annotation on it
       expect(
-          new SvgPropMixinsTest({})
+           SvgPropMixinsTest({})
             ..clipPath = null
             ..cx= null,
           {'clipPath': null, 'cx': null});
@@ -90,11 +90,11 @@ main() {
   });
 
   group('UbiquitousProps', () {
-    testInvalidKey((() => new UbiquitousPropMixinsTest({})));
+    testInvalidKey((() =>  UbiquitousPropMixinsTest({})));
     test('uses unnamespaced keys', () {
       // Test two keys to reduce the possibility that the key we picked might have a custom @Accessor annotation on it
       expect(
-          new UbiquitousPropMixinsTest({})
+           UbiquitousPropMixinsTest({})
             ..tabIndex = null
             ..id = null,
           {'tabIndex': null, 'id': null});
@@ -102,7 +102,7 @@ main() {
 
     group('has a getter that provides a typed view of', () {
       test('aria props', () {
-        var instance = new UbiquitousPropMixinsTest({})
+        var instance = UbiquitousPropMixinsTest({})
           ..aria.labelledby = 'foo';
 
         expect(instance, equals(ariaProps()..labelledby = 'foo'), reason: 'should set the prop properly');
@@ -111,7 +111,7 @@ main() {
       });
 
       test('DOM props', () {
-        var instance = new UbiquitousPropMixinsTest({})
+        var instance = UbiquitousPropMixinsTest({})
           ..dom.target = 'foo';
 
         expect(instance, equals(domProps()..target = 'foo'), reason: 'should set the prop properly');
@@ -122,12 +122,12 @@ main() {
   });
 
   group('AriaProps', () {
-    testInvalidKey(() => new AriaPropMixinsTest({}));
+    testInvalidKey(() =>  AriaPropMixinsTest({}));
 
     test('uses unnamespaced keys with \'aria-\' prefix', () {
       // Test two keys to reduce the possibility that the key we picked might have a custom @Accessor annotation on it
       expect(
-          new AriaPropMixinsTest({})
+           AriaPropMixinsTest({})
             ..activedescendant = null
             ..atomic = null,
           {'aria-activedescendant': null, 'aria-atomic': null});
@@ -148,7 +148,7 @@ class DomPropMixinsTest extends MapView with
   @override
   operator [](key) {
     if (!this.containsKey(key)) {
-      throw new ArgumentError('Map does not contain this key: $key');
+      throw ArgumentError('Map does not contain this key: $key');
     }
     return super[key];
   }
@@ -167,7 +167,7 @@ class SvgPropMixinsTest extends MapView with
   @override
   operator [](key) {
     if (!this.containsKey(key)) {
-      throw new ArgumentError('Map does not contain this key: $key');
+      throw ArgumentError('Map does not contain this key: $key');
     }
     return super[key];
   }
@@ -186,7 +186,7 @@ class ReactPropMixinsTest extends MapView with
   @override
   operator [](key) {
     if (!this.containsKey(key)) {
-      throw new ArgumentError('Map does not contain this key: $key');
+      throw ArgumentError('Map does not contain this key: $key');
     }
     return super[key];
   }
@@ -205,7 +205,7 @@ class CssClassPropMixinsTest extends MapView with
   @override
   operator [](key) {
     if (!this.containsKey(key)) {
-      throw new ArgumentError('Map does not contain this key: $key');
+      throw ArgumentError('Map does not contain this key: $key');
     }
     return super[key];
   }
@@ -223,7 +223,7 @@ class UbiquitousPropMixinsTest extends MapView with
   @override
   operator [](key) {
     if (!this.containsKey(key)) {
-      throw new ArgumentError('Map does not contain this key: $key');
+      throw ArgumentError('Map does not contain this key: $key');
     }
     return super[key];
   }
@@ -241,7 +241,7 @@ class AriaPropMixinsTest extends MapView with
   @override
   operator [](key) {
     if (!this.containsKey(key)) {
-      throw new ArgumentError('Map does not contain this key: $key');
+      throw ArgumentError('Map does not contain this key: $key');
     }
     return super[key];
   }
