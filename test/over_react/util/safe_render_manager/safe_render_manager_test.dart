@@ -119,33 +119,183 @@ main() {
     });
 
     group('edge-cases', () {
-      group('rerenders content when initial and rerender calls happen synchronously from a React', () {
-        test('lifecycle method', () {
-          final jacket = mount(Test({}));
-          jacket.rerender(Test({
-            'onComponentDidUpdate': expectAsyncBound(() {
-              renderManager.render(Wrapper()('1'));
-              renderManager.render(Wrapper()('2'));
-              expect(mountNode.children, isEmpty, reason: 'should be rendering async due to React 16 behavior');
-            }),
-          }));
+      group('rerenders content correctly when initial and second render happen synchronously calls come from', () {
+        const render1Text = 'render1';
+        const render2Text = 'render2';
 
-          expect(mountNode.text, '2', reason: 'should have rendered the content from the last render call');
+        bool onMaybeUnmountedCalled;
+
+        setUp(() {
+          onMaybeUnmountedCalled = false;
         });
 
-        test('event callback', () {
-          final jacket = mount((Wrapper()
-            ..onClick = expectAsyncBound1((_) {
-              renderManager.render(Wrapper()('1'));
-              renderManager.render(Wrapper()('2'));
-              expect(mountNode.children, isEmpty, reason: 'should be rendering async due to React 16 behavior');
-            })
-          )(), attachedToDocument: true);
+        Future<Null> sharedTest({@required void Function() setUpAndReturnTriggerRender(void doRenders()),
+          @required bool verifyImmediateRender,
+          @required bool verifyDeferredRender,
+          bool verifyAsyncRender = false,
+        }) async {
+          if (verifyImmediateRender && verifyDeferredRender) {
+            throw new ArgumentError('verifyImmediateRender and verifyDeferredRender '
+                'are mutually exclusive and cannot both be set to true');
+          }
 
-          // Use a real click since simulated clicks don't trigger this async behavior
-          jacket.getNode().click();
+          void _doRenders() {
+            renderManager.render(Wrapper()(render1Text));
+            renderManager.render(Wrapper()(render2Text));
 
-          expect(mountNode.text, '2', reason: 'should have rendered the content from the last render call');
+            if (verifyImmediateRender) {
+              expect(mountNode.text, render2Text, reason: 'should have updated synchronously');
+            }
+
+            if (verifyDeferredRender) {
+              expect(mountNode.text, isNot(anyOf(render1Text, render2Text)),
+                  reason: 'should have updated synchronously');
+            }
+          }
+
+          final triggerRenders = setUpAndReturnTriggerRender(expectAsyncBound(_doRenders));
+
+          await pumpEventQueue();
+          // todo also add componentWillUnmount callback
+          expect(onMaybeUnmountedCalled, isFalse,
+              reason: 'test setup: content should still be mounted before doRenders is called');
+          expect(mountNode.text, isNot(anyOf(render1Text, render2Text)),
+              reason: 'test setup: content should still be mounted before doRenders is called');
+
+          triggerRenders();
+
+          expect(mountNode.text, render2Text, reason: 'should have updated by now');
+        }
+
+        group('the same React tree (rerenders only, not mounting), from a', () {
+          test('event handler', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                document.body.append(renderManager.mountNode);
+                renderManager.render((Wrapper()
+                  ..onClick = (_) {
+                    doRenders();
+                  }
+                )('setup render'));
+
+                // Use a real click since simulated clicks don't trigger this async behavior
+                return () => findDomNode(renderManager.contentRef).click();
+              },
+            );
+          });
+
+          test('callback of setState performed within event handler', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                document.body.append(renderManager.mountNode);
+                renderManager.render((Wrapper()
+                  ..onClick = (_) {
+                    (renderManager.contentRef as react.Component).setState({}, doRenders);
+                  }
+                )('setup render'));
+
+                // Use a real click since simulated clicks don't trigger this async behavior
+                return () => findDomNode(renderManager.contentRef).click();
+              },
+            );
+          });
+
+          test('lifecycle method (pre-commit phase)', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                renderManager.render(Test({
+                  'onComponentWillUpdate': doRenders,
+                }));
+
+                return () => (renderManager.contentRef as react.Component).redraw();
+              },
+            );
+          });
+
+          test('lifecycle method (post-commit phase)', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                renderManager.render(Test({
+                  'onComponentDidUpdate': doRenders,
+                }));
+
+                return () => (renderManager.contentRef as react.Component).redraw();
+              },
+            );
+          });
+        });
+
+        group('another React tree, from a', () {
+          test('event handler', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                final jacket = mount((Wrapper()
+                  ..onClick = (_) {
+                    doRenders();
+                  }
+                )(), attachedToDocument: true);
+
+                // Use a real click since simulated clicks don't trigger this async behavior
+                return () => jacket.getNode().click();
+              },
+            );
+          });
+
+          test('callback of setState performed within event handler', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                TestJacket jacket;
+                jacket = mount((Wrapper()
+                  ..onClick = (_) {
+                    jacket.getDartInstance().setState({}, doRenders);
+                  }
+                )(), attachedToDocument: true);
+
+                // Use a real click since simulated clicks don't trigger this async behavior
+                return () => jacket.getNode().click();
+              },
+            );
+          });
+
+          test('lifecycle method (pre-commit phase)', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                final jacket = mount(Test({
+                  'onComponentWillUpdate': doRenders,
+                }));
+
+                return () => jacket.getDartInstance().redraw();
+              },
+            );
+          });
+
+          test('lifecycle method (post-commit phase)', () async {
+            await sharedTest(
+              verifyImmediateRender: false,
+              verifyDeferredRender: true,
+              setUpAndReturnTriggerRender: (doRenders) {
+                final jacket = mount(Test({
+                  'onComponentDidUpdate': doRenders,
+                }));
+
+                return () => jacket.getDartInstance().redraw();
+              },
+            );
+          });
         });
       });
 
