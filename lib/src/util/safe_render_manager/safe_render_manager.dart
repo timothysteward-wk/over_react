@@ -3,7 +3,7 @@ import 'dart:html';
 
 import 'package:meta/meta.dart';
 import 'package:over_react/over_react.dart';
-import 'package:react/react_dom.dart' as react_dom;
+import 'package:over_react/react_dom.dart' as react_dom;
 import 'package:w_common/disposable.dart';
 
 import './safe_render_manager_helper.dart';
@@ -52,27 +52,36 @@ class SafeRenderManager extends Disposable {
       case _RenderState.mounting:
         _renderQueue.add(content);
         break;
-      case _RenderState.mounted:
-        _helper.renderContent(content);
-        break;
-      case _RenderState.unmounted:
-        try {
-          _state = _RenderState.mounting;
-          react_dom.render((SafeRenderManagerHelper()
-            ..ref = _helperRef
-            ..getInitialContent = () {
-              final value = content;
-              // Clear this closure variable out so it isn't retained.
-              content = null;
-              return value;
-            }
-            ..contentRef = _contentCallbackRef
-          )(), mountNode);
-        } catch (_) {
-          _state = _RenderState.unmounted;
-          rethrow;
+      case _RenderState.mountedOrErrored:
+        // Handle if _helper was unmounted due to an uncaught error.
+        if (_helper == null) {
+          _mountContent(content);
+        } else {
+          _helper.renderContent(content); 
         }
         break;
+      case _RenderState.unmounted:
+        _mountContent(content);
+        break;
+    }
+  }
+  
+  void _mountContent(ReactElement content) {
+    try {
+      _state = _RenderState.mounting;
+      react_dom.render((SafeRenderManagerHelper()
+        ..ref = _helperRef
+        ..getInitialContent = () {
+          final value = content;
+          // Clear this closure variable out so it isn't retained.
+          content = null;
+          return value;
+        }
+        ..contentRef = _contentCallbackRef
+      )(), mountNode);
+    } catch (_) {
+      _state = _RenderState.unmounted;
+      rethrow;
     }
   }
 
@@ -106,7 +115,12 @@ class SafeRenderManager extends Disposable {
       case _RenderState.mounting:
         _unmountContent();
         break;
-      case _RenderState.mounted:
+      case _RenderState.mountedOrErrored:
+        // Handle if _helper was unmounted due to an uncaught error.
+        if (_helper == null) {
+          _unmountContent();
+          return;
+        }
         _helper.tryUnmountContent(onMaybeUnmounted: (isUnmounted) {
           if (isUnmounted || force) {
             _unmountContent();
@@ -131,7 +145,7 @@ class SafeRenderManager extends Disposable {
     _helper = ref;
     if (_helper != null) {
       if (_state == _RenderState.mounting) {
-        _state = _RenderState.mounted;
+        _state = _RenderState.mountedOrErrored;
       }
       _renderQueue.forEach(_helper.renderContent);
       _renderQueue = [];
@@ -170,5 +184,5 @@ class SafeRenderManager extends Disposable {
 }
 
 enum _RenderState {
-  mounting, mounted, unmounted
+  mounting, mountedOrErrored, unmounted
 }
