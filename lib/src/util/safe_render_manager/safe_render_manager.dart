@@ -69,7 +69,7 @@ class SafeRenderManager extends Disposable {
             ..contentRef = _contentCallbackRef
           )(), mountNode);
         } catch (_) {
-          _state == _RenderState.unmounted;
+          _state = _RenderState.unmounted;
           rethrow;
         }
         break;
@@ -91,12 +91,12 @@ class SafeRenderManager extends Disposable {
   void tryUnmountContent({void onMaybeUnmounted(bool isUnmounted)}) {
     // Check here since we call _tryUnmountContent in this class's disposal logic.
     _checkDisposalState();
-    _tryUnmountContent(onMaybeUnmounted: onMaybeUnmounted, force: false);
+    _safeUnmountContent(onMaybeUnmounted: onMaybeUnmounted, force: false);
   }
 
-  void _tryUnmountContent({void onMaybeUnmounted(bool isUnmounted), @required bool force}) {
+  void _safeUnmountContent({void onMaybeUnmounted(bool isUnmounted), @required bool force}) {
     void _unmountContent() {
-      _state == _RenderState.unmounted;
+      _state = _RenderState.unmounted;
       _renderQueue = [];
       react_dom.unmountComponentAtNode(mountNode);
       onMaybeUnmounted?.call(true);
@@ -133,7 +133,6 @@ class SafeRenderManager extends Disposable {
       if (_state == _RenderState.mounting) {
         _state = _RenderState.mounted;
       }
-      _state = _RenderState.mounted;
       _renderQueue.forEach(_helper.renderContent);
       _renderQueue = [];
     }
@@ -151,7 +150,7 @@ class SafeRenderManager extends Disposable {
 
     runZoned(() {
       // Attempt to unmount the content safely
-      _tryUnmountContent(force: true, onMaybeUnmounted: (_) {
+      _safeUnmountContent(force: true, onMaybeUnmounted: (_) {
         completer?.complete();
         // Clear out to not retain it in the onError closure, which has
         // an indefinitely long lifetime.
